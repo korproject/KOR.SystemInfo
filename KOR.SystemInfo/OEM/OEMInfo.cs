@@ -12,25 +12,27 @@ namespace KOR.SystemInfo.OEM
 		/// <returns></returns>
 		public static OEMInfo GetOEMInfo()
 		{
-			OEMInfo oemInfo = new OEMInfo();
+            OEMInfo oemInfo = new OEMInfo
+            {
 
-			// get baseboard info
-			oemInfo.BaseBoard = GetBaseBoardInfo();
-			// get cpu info
-			oemInfo.CPU = GetCPUInfo();
-			// get gpu info
-			oemInfo.GPU = GetGPUInfo();
-			// get ard disk info
-			oemInfo.HardDrive = GetPrimaryHardDiskInfo();
-			// get memory info
-			oemInfo.Memory = GetMemoryInfo();
-			// get monitor info
-			oemInfo.Monitor = GetMonitorInfo();
+                // get baseboard info
+                BaseBoard = GetBaseBoardInfo(),
+                // get cpu info
+                CPU = GetCPUInfo(),
+                // get gpu info
+                GPU = GetGPUInfo(),
+                // get ard disk info
+                HardDrive = GetPrimaryHardDiskInfo(),
+                // get memory info
+                Memory = GetMemoryInfo(),
+                // get monitor info
+                Monitor = GetMonitorInfo(),
 
-			// get mac address
-			oemInfo.MacAddress = GetMacAddress();
+                // get mac address
+                MacAddress = GetMacAddress()
+            };
 
-			return oemInfo;
+            return oemInfo;
 		}
 
 		/// <summary>
@@ -107,22 +109,22 @@ namespace KOR.SystemInfo.OEM
 							cpu.Manufacturer = (string)properties.Value;
 							break;
 						case "Family":
-							cpu.Family = (UInt16)properties.Value;
+							cpu.Family = (ushort)properties.Value;
 							break;
 						case "MaxClockSpeed":
-							cpu.MaxClockSpeed = (UInt32)properties.Value;
+							cpu.MaxClockSpeed = (uint)properties.Value;
 							break;
 						case "NumberOfCores":
-							cpu.Cores = (UInt32)properties.Value;
+							cpu.Cores = (uint)properties.Value;
 							break;
 						case "NumberOfEnabledCore":
-							cpu.EnabledCores = (UInt32)properties.Value;
+							cpu.EnabledCores = (uint)properties.Value;
 							break;
 						case "NumberOfLogicalProcessors":
-							cpu.LogicalCores = (UInt32)properties.Value;
+							cpu.LogicalCores = (uint)properties.Value;
 							break;
 						case "Architecture":
-							switch ((UInt16)properties.Value)
+							switch ((ushort)properties.Value)
 							{
 								case 0: cpu.Architecture = "32";
 									break;
@@ -149,7 +151,7 @@ namespace KOR.SystemInfo.OEM
 							}
 							break;
 						case "ProcessorType":
-							switch ((UInt16)properties.Value)
+							switch ((ushort)properties.Value)
 							{
 								case 0:
 									cpu.ProcessorType = "Other";
@@ -191,7 +193,7 @@ namespace KOR.SystemInfo.OEM
 		/// <returns></returns>
 		public static string GetMacAddress()
 		{
-			string MACAddress = String.Empty;
+			string MACAddress = string.Empty;
 
 			// select Win32_NetworkAdapterConfiguration from Management Object Searcher
 			ManagementObjectSearcher managmentSearcher = new ManagementObjectSearcher("Select * FROM Win32_NetworkAdapterConfiguration");
@@ -246,7 +248,7 @@ namespace KOR.SystemInfo.OEM
 							hardDrive.Model = (string)properties.Value;
 							break;
 						case "Size":
-							hardDrive.Size = (UInt64)properties.Value;
+							hardDrive.Size = (ulong)properties.Value;
 							break;
 						default:
 							break;
@@ -289,10 +291,10 @@ namespace KOR.SystemInfo.OEM
 							memory.Model = (string)properties.Value;
 							break;
 						case "Speed":
-							memory.Speed = (UInt32)properties.Value;
+							memory.Speed = (uint)properties.Value;
 							break;
 						case "Capacity":
-							memory.Size = (UInt64)properties.Value;
+							memory.Size = (ulong)properties.Value;
 							break;
 						default:
 							break;
@@ -336,16 +338,16 @@ namespace KOR.SystemInfo.OEM
 							monitor.MonitorType = (string)properties.Value;
 							break;
 						case "PixelsPerYLogicalInch":
-							monitor.PixelsPerYLogicalInch = (UInt32)properties.Value;
+							monitor.PixelsPerYLogicalInch = (uint)properties.Value;
 							break;
 						case "PixelsPerXLogicalInch":
-							monitor.PixelsPerXLogicalInch = (UInt32)properties.Value;
+							monitor.PixelsPerXLogicalInch = (uint)properties.Value;
 							break;
 						case "ScreenWidth":
-							monitor.ScreenWidth = (UInt32)properties.Value;
+							monitor.ScreenWidth = (uint)properties.Value;
 							break;
 						case "ScreenHeight":
-							monitor.ScreenHeight = (UInt32)properties.Value;
+							monitor.ScreenHeight = (uint)properties.Value;
 							break;
 						default:
 							break;
@@ -386,7 +388,7 @@ namespace KOR.SystemInfo.OEM
 							gpu.Name = (string)properties.Value;
 							break;
 						case "AdapterRAM":
-							gpu.Ram = (UInt32)properties.Value;
+							gpu.Ram = (uint)properties.Value;
 							break;
 						case "VideoProcessor":
 							gpu.VideoProcessor = (string)properties.Value;

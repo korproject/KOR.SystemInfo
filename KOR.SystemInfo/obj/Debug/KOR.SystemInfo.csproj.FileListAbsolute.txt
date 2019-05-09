@@ -4,3 +4,9 @@ C:\Users\e9396\Desktop\Projects\repos\KOR.LIBS\KOR.SystemInfo\KOR.SystemInfo\obj
 C:\Users\e9396\Desktop\Projects\repos\KOR.LIBS\KOR.SystemInfo\KOR.SystemInfo\obj\Debug\KOR.SystemInfo.csproj.CoreCompileInputs.cache
 C:\Users\e9396\Desktop\Projects\repos\KOR.LIBS\KOR.SystemInfo\KOR.SystemInfo\obj\Debug\KOR.SystemInfo.dll
 C:\Users\e9396\Desktop\Projects\repos\KOR.LIBS\KOR.SystemInfo\KOR.SystemInfo\obj\Debug\KOR.SystemInfo.pdb
+C:\Users\e9396\Desktop\GitHub\KOR.SystemInfo\KOR.SystemInfo\bin\Debug\KOR.SystemInfo.dll
+C:\Users\e9396\Desktop\GitHub\KOR.SystemInfo\KOR.SystemInfo\bin\Debug\KOR.SystemInfo.pdb
+C:\Users\e9396\Desktop\GitHub\KOR.SystemInfo\KOR.SystemInfo\obj\Debug\KOR.SystemInfo.csprojAssemblyReference.cache
+C:\Users\e9396\Desktop\GitHub\KOR.SystemInfo\KOR.SystemInfo\obj\Debug\KOR.SystemInfo.csproj.CoreCompileInputs.cache
+C:\Users\e9396\Desktop\GitHub\KOR.SystemInfo\KOR.SystemInfo\obj\Debug\KOR.SystemInfo.dll
+C:\Users\e9396\Desktop\GitHub\KOR.SystemInfo\KOR.SystemInfo\obj\Debug\KOR.SystemInfo.pdb

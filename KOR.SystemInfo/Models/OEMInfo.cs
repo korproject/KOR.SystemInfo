@@ -8,7 +8,6 @@
 		public HardDrive HardDrive { get; set; }
 		public Memory Memory { get; set; }
 		public Monitor Monitor { get; set; }
-
 		public string MacAddress { get; set; }
 	}
 }

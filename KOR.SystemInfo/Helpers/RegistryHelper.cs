@@ -14,12 +14,11 @@ namespace KOR.SystemInfo.Helpers
 		/// <returns></returns>
 		public static string ReadKey(RegistryHive registryRoot, string field, string key, string defaultValue)
 		{
-			string value = string.Empty;
+            RegistryKey registryKey;
 
-			// create registry key
-			RegistryKey registryKey = null;
+            // create registry key
 
-			if (Environment.Is64BitOperatingSystem)
+            if (Environment.Is64BitOperatingSystem)
 			{
 				registryKey = RegistryKey.OpenBaseKey(registryRoot, RegistryView.Registry64);
 			}
@@ -28,9 +27,9 @@ namespace KOR.SystemInfo.Helpers
 				registryKey = RegistryKey.OpenBaseKey(registryRoot, RegistryView.Registry32);
 			}
 
-			value = registryKey.OpenSubKey(field).GetValue(key, defaultValue).ToString();
+            string value = registryKey.OpenSubKey(field).GetValue(key, defaultValue).ToString();
 
-			registryKey.Close();
+            registryKey.Close();
 
 			return value;
 		}

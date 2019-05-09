@@ -90,12 +90,12 @@ namespace KOR.SystemInfo.System
 				return null;
 			}
 
-			var Mm = result.Split('.');
+			var mM = result.Split('.');
 
 			return new MajorMinorVersion()
 			{
-				Major = Int32.Parse(Mm[0]),
-				Minor = Int32.Parse(Mm[1])
+				Major = int.Parse(mM[0]),
+				Minor = int.Parse(mM[1])
 			};
 		}
 
@@ -128,7 +128,7 @@ namespace KOR.SystemInfo.System
 				return 0;
 			}
 
-			return Int32.Parse(result);
+			return int.Parse(result);
 		}
 
 		/// <summary>
@@ -148,9 +148,8 @@ namespace KOR.SystemInfo.System
 		}
 
 
-		#endregion
-	}
-
+        #endregion
+    }
 	public class OperatingSystem
 	{
 		public OSName OSName { get; set; }
