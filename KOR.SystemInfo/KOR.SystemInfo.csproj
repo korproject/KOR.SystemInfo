@@ -46,6 +46,7 @@
     <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="Models\BaseBoard.cs" />
     <Compile Include="Models\CPU.cs" />
+    <Compile Include="Models\Drive.cs" />
     <Compile Include="Models\GPU.cs" />
     <Compile Include="Models\HardDrive.cs" />
     <Compile Include="Models\Memory.cs" />

@@ -1,7 +1,9 @@
 ﻿using KOR.SystemInfo.Helpers;
 using KOR.SystemInfo.Models;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Management;
 using System.Runtime.InteropServices;
 
@@ -422,5 +424,29 @@ namespace KOR.SystemInfo.OEM
 
 			return gpu;
 		}
+
+        public static List<Drive> GetDriveInfo()
+        {
+            List<Drive> drives = new List<Drive>();
+
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo drive in allDrives)
+            {
+                drives.Add(new Drive()
+                {
+                    Letter = drive.Name,
+                    Type = drive.DriveType,
+                    FileSystem = drive.DriveFormat,
+                    Size = drive.TotalSize,
+                    AvailableSpace = drive.AvailableFreeSpace,
+                    AvailableSpacePercent = 100 * (double)drive.TotalFreeSpace / drive.TotalSize,
+                    Usage = drive.TotalSize - drive.AvailableFreeSpace,
+                    UsagePercent = 100 - (100 * (double)drive.TotalFreeSpace / drive.TotalSize)
+                });
+            }
+
+            return drives;
+        }
 	}
 }

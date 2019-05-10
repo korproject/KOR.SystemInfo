@@ -79,6 +79,20 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <Label Content="Installed Drives"></Label>
+                    <ListView x:Name="drives">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Item,  StringFormat={}{0}: }" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Value, FallbackValue=none, TargetNullValue=none}" FontWeight="Thin" />
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+
             </StackPanel>
 
             <StackPanel Grid.Column="2">

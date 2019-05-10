@@ -1,4 +1,6 @@
-﻿namespace KOR.SystemInfo.Models
+﻿using System.Collections.Generic;
+
+namespace KOR.SystemInfo.Models
 {
 	public class OEMInfo
 	{
@@ -9,5 +11,6 @@
 		public Memory Memory { get; set; }
 		public Monitor Monitor { get; set; }
         public string MacAddress { get; set; }
+        public List<Drive> Drives { get; set; }
 	}
 }

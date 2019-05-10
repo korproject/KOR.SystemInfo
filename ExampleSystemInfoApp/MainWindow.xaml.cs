@@ -2,6 +2,8 @@
 using KOR.SystemInfo.System;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -199,6 +201,28 @@ namespace ExampleSystemInfoApp
                     new ListItems{
                         Item = "Current Build",
                         Value = SystemInfo.GetCurrentBuild().ToString()
+                    }
+                };
+
+                var _driveList = OEM.GetDriveInfo();
+
+                drives.ItemsSource = new List<ListItems>
+                {
+                    new ListItems {
+                        Item = "Letter",
+                        Value = _driveList[0].Letter
+                    },
+                    new ListItems{
+                        Item = "Size",
+                        Value = _driveList[0].Size.ToString()
+                    },
+                    new ListItems{
+                        Item = "Usage",
+                        Value = _driveList[0].Usage + " - %" + _driveList[0].UsagePercent.ToString().Substring(0, 3)
+                    },
+                    new ListItems{
+                        Item = "AvailableSpace",
+                        Value = _driveList[0].AvailableSpace + " - %" + _driveList[0].AvailableSpacePercent.ToString().Substring(0, 3)
                     }
                 };
             }
