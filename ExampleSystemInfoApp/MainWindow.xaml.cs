@@ -174,8 +174,8 @@ namespace ExampleSystemInfoApp
                             Value = monitorInfo.MonitorType
                         },
                         new ListItems{
-                            Item = "PPI",
-                            Value = monitorInfo.PixelsPerXLogicalInch + "x" + monitorInfo.PixelsPerYLogicalInch
+                            Item = "ScreenInchSize",
+                            Value = monitorInfo.ScreenInchSize.ToString()
                         },
                         new ListItems
                         {

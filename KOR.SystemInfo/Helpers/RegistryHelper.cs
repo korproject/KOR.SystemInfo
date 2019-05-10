@@ -5,14 +5,14 @@ namespace KOR.SystemInfo.Helpers
 {
 	public class RegistryHelper
 	{
-		/// <summary>
-		/// Registy Key Reader
-		/// </summary>
-		/// <param name="registryRoot">Enum RegistryRoot</param>
-		/// <param name="field">part field</param>
-		/// <param name="key">property key</param>
-		/// <returns></returns>
-		public static string ReadKey(RegistryHive registryRoot, string field, string key, string defaultValue)
+        /// <summary>
+        /// Registy Key Reader
+        /// </summary>
+        /// <param name="registryRoot">Enum RegistryRoot</param>
+        /// <param name="field">part field</param>
+        /// <param name="key">property key</param>
+        /// <returns></returns>
+        public static string ReadKey(RegistryHive registryRoot, string field, string key, string defaultValue)
 		{
             RegistryKey registryKey;
 

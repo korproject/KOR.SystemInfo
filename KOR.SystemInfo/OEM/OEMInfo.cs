@@ -1,17 +1,23 @@
-﻿using KOR.SystemInfo.Models;
+﻿using KOR.SystemInfo.Helpers;
+using KOR.SystemInfo.Models;
 using System;
+using System.Drawing;
 using System.Management;
+using System.Runtime.InteropServices;
 
 namespace KOR.SystemInfo.OEM
 {
 	public class OEM
 	{
-		/// <summary>
-		/// Get general oem info
-		/// </summary>
-		/// <returns></returns>
-		public static OEMInfo GetOEMInfo()
-		{
+        [DllImport("gdi32.dll")]
+        static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+
+        /// <summary>
+        /// Get general oem info
+        /// </summary>
+        /// <returns></returns>
+        public static OEMInfo GetOEMInfo()
+        {
             OEMInfo oemInfo = new OEMInfo
             {
 
@@ -112,16 +118,16 @@ namespace KOR.SystemInfo.OEM
 							cpu.Family = (ushort)properties.Value;
 							break;
 						case "MaxClockSpeed":
-							cpu.MaxClockSpeed = (uint)properties.Value;
+							cpu.MaxClockSpeed = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						case "NumberOfCores":
-							cpu.Cores = (uint)properties.Value;
+							cpu.Cores = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						case "NumberOfEnabledCore":
-							cpu.EnabledCores = (uint)properties.Value;
+							cpu.EnabledCores = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						case "NumberOfLogicalProcessors":
-							cpu.LogicalCores = (uint)properties.Value;
+							cpu.LogicalCores = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						case "Architecture":
 							switch ((ushort)properties.Value)
@@ -291,10 +297,10 @@ namespace KOR.SystemInfo.OEM
 							memory.Model = (string)properties.Value;
 							break;
 						case "Speed":
-							memory.Speed = (uint)properties.Value;
+							memory.Speed = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						case "Capacity":
-							memory.Size = (ulong)properties.Value;
+							memory.Size = properties.Value is null ? 0 : (ulong)properties.Value;
 							break;
 						default:
 							break;
@@ -338,16 +344,16 @@ namespace KOR.SystemInfo.OEM
 							monitor.MonitorType = (string)properties.Value;
 							break;
 						case "PixelsPerYLogicalInch":
-							monitor.PixelsPerYLogicalInch = (uint)properties.Value;
+							monitor.PixelsPerYLogicalInch = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						case "PixelsPerXLogicalInch":
-							monitor.PixelsPerXLogicalInch = (uint)properties.Value;
+							monitor.PixelsPerXLogicalInch = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						case "ScreenWidth":
-							monitor.ScreenWidth = (uint)properties.Value;
+							monitor.ScreenWidth = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						case "ScreenHeight":
-							monitor.ScreenHeight = (uint)properties.Value;
+							monitor.ScreenHeight = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						default:
 							break;
@@ -358,6 +364,18 @@ namespace KOR.SystemInfo.OEM
 				managmentObject.Dispose();
 			}
 
+            if (CommonHelpers.IsDllLoaded("gdi32.dll"))
+            {
+                Graphics graphics = Graphics.FromHwnd(IntPtr.Zero); // using System.Drawing; (add from referances)
+                IntPtr desktop = graphics.GetHdc();
+
+                int monitorHeight = GetDeviceCaps(desktop, 6);
+                int monitorWidth = GetDeviceCaps(desktop, 4);
+
+                monitor.ScreenHeightMm = monitorHeight;
+                monitor.ScreenWidthMm = monitorWidth;
+                monitor.ScreenInchSize = Convert.ToDouble($"{Math.Sqrt(Math.Pow(monitorHeight, 2) + Math.Pow(monitorWidth, 2)) / 25,4:#,##0.00}");
+            }
 
 			return monitor;
 		}
@@ -388,7 +406,7 @@ namespace KOR.SystemInfo.OEM
 							gpu.Name = (string)properties.Value;
 							break;
 						case "AdapterRAM":
-							gpu.Ram = (uint)properties.Value;
+							gpu.Ram = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
 						case "VideoProcessor":
 							gpu.VideoProcessor = (string)properties.Value;

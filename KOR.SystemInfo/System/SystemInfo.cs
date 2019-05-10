@@ -7,13 +7,13 @@ namespace KOR.SystemInfo.System
 {
 	public class SystemInfo
 	{
-		#region OS
+        #region OS
 
-		/// <summary>
-		/// Get general operating system info
-		/// </summary>
-		/// <returns></returns>
-		public static OperatingSystem GetOSInfo()
+        /// <summary>
+        /// Get general operating system info
+        /// </summary>
+        /// <returns></returns>
+        public static OperatingSystem GetOSInfo()
 		{
 			OperatingSystem OS = new OperatingSystem();
 

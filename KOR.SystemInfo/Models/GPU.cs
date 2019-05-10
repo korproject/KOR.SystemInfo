@@ -6,7 +6,7 @@ namespace KOR.SystemInfo.Models
 	{
 		public string Name { get; set; }
 		public string AdapterDACType { get; set; }
-		public UInt32 Ram { get; set; }
+		public uint Ram { get; set; }
 		public string VideoProcessor { get; set; }
 	}
 }
