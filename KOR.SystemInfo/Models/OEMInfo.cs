@@ -12,5 +12,6 @@ namespace KOR.SystemInfo.Models
 		public Monitor Monitor { get; set; }
         public string MacAddress { get; set; }
         public List<Drive> Drives { get; set; }
+        public Bios Bios { get; set; }
 	}
 }

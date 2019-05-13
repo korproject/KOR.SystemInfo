@@ -12,10 +12,10 @@ namespace KOR.SystemInfo.Models
         public string Letter { get; set; }
         public DriveType Type { get; set; }
         public string FileSystem { get; set; }
-        public long Size { get; set; }
-        public long AvailableSpace { get; set; }
-        public double AvailableSpacePercent { get; set; }
+        public long TotalSize { get; set; }
         public long Usage { get; set; }
         public double UsagePercent { get; set; }
+        public long AvailableSpace { get; set; }
+        public double AvailableSpacePercent { get; set; }
     }
 }

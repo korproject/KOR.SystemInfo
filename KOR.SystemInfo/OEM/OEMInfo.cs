@@ -6,6 +6,8 @@ using System.Drawing;
 using System.IO;
 using System.Management;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows;
 
 namespace KOR.SystemInfo.OEM
 {
@@ -303,7 +305,8 @@ namespace KOR.SystemInfo.OEM
 							break;
 						case "Capacity":
 							memory.Size = properties.Value is null ? 0 : (ulong)properties.Value;
-							break;
+                            memory.SizeGB = properties.Value is null ? "0" : CommonHelpers.ToSize(Convert.ToInt64((ulong)properties.Value), CommonHelpers.SizeUnits.GB);
+                            break;
 						default:
 							break;
 					}
@@ -390,13 +393,10 @@ namespace KOR.SystemInfo.OEM
 		{
 			GPU gpu = new GPU();
 
-			// select Win32_Processor from Management Object Searcher
 			ManagementObjectSearcher managmentSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
 
-			// foreach as Managment Object
 			foreach (ManagementObject managmentObject in managmentSearcher.Get())
 			{
-				// get properties
 				foreach (PropertyData properties in managmentObject.Properties)
 				{
 					switch (properties.Name)
@@ -409,7 +409,8 @@ namespace KOR.SystemInfo.OEM
 							break;
 						case "AdapterRAM":
 							gpu.Ram = properties.Value is null ? 0 : (uint)properties.Value;
-							break;
+                            gpu.RamGB = properties.Value is null ? "0" : CommonHelpers.ToSize((uint)properties.Value, CommonHelpers.SizeUnits.GB);
+                            break;
 						case "VideoProcessor":
 							gpu.VideoProcessor = (string)properties.Value;
 							break;
@@ -418,7 +419,6 @@ namespace KOR.SystemInfo.OEM
 					}
 				}
 
-				// dispose managmentObject
 				managmentObject.Dispose();
 			}
 
@@ -438,7 +438,7 @@ namespace KOR.SystemInfo.OEM
                     Letter = drive.Name,
                     Type = drive.DriveType,
                     FileSystem = drive.DriveFormat,
-                    Size = drive.TotalSize,
+                    TotalSize = drive.TotalSize,
                     AvailableSpace = drive.AvailableFreeSpace,
                     AvailableSpacePercent = 100 * (double)drive.TotalFreeSpace / drive.TotalSize,
                     Usage = drive.TotalSize - drive.AvailableFreeSpace,
@@ -446,7 +446,56 @@ namespace KOR.SystemInfo.OEM
                 });
             }
 
+
+
             return drives;
+        }
+
+        public static Bios GetBiosInfo()
+        {
+            Bios bios = new Bios();
+
+            ManagementObjectSearcher managmentSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_BIOS");
+
+            foreach (ManagementObject managmentObject in managmentSearcher.Get())
+            {
+                foreach (PropertyData properties in managmentObject.Properties)
+                {
+                    switch (properties.Name)
+                    {
+                        case "BIOSVersion":
+                            bios.Version = string.Join(" / ", (string[])properties.Value);
+                            break;
+                        case "BuildNumber":
+                            bios.BuildNumber = (string)properties.Value;
+                            break;
+                        case "Caption":
+                            bios.Caption = (string)properties.Value;
+                            break;
+                        case "CodeSet":
+                            bios.CodeSet = (string)properties.Value;
+                            break;
+                        case "CurrentLanguage":
+                            bios.CurrentLanguage = (string)properties.Value;
+                            break;
+                        case "Description":
+                            bios.Description = (string)properties.Value;
+                            break;
+                        case "InstallDate":
+                            bios.InstallDate = (string)properties.Value;
+                            break;
+                        case "Manufacturer":
+                            bios.Manufacturer = (string)properties.Value;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                managmentObject.Dispose();
+            }
+
+            return bios;
         }
 	}
 }

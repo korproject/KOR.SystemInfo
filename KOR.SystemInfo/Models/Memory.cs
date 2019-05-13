@@ -9,5 +9,6 @@ namespace KOR.SystemInfo.Models
 		public string Model { get; set; }
 		public uint Speed { get; set; }
 		public ulong Size { get; set; }
-	}
+        public string SizeGB { get; set; }
+    }
 }

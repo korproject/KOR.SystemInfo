@@ -1,4 +1,5 @@
-﻿using KOR.SystemInfo.OEM;
+﻿using KOR.SystemInfo.Helpers;
+using KOR.SystemInfo.OEM;
 using KOR.SystemInfo.System;
 using System;
 using System.Collections.Generic;
@@ -192,37 +193,70 @@ namespace ExampleSystemInfoApp
                     };
                 }
 
+
+                var osInfo = SystemInfo.GetOSInfo();
+
                 system.ItemsSource = new List<ListItems>
                 {
                     new ListItems {
                         Item = "Operating Info",
-                        Value = SystemInfo.GetOSInfo().OSName.Name + " " + SystemInfo.GetOSInfo().OSName.VersionName
+                        Value = osInfo.OSName + osInfo.MajorMinorVersion.Major.ToString()
                     },
                     new ListItems{
-                        Item = "Current Build",
-                        Value = SystemInfo.GetCurrentBuild().ToString()
+                        Item = "Build",
+                        Value = osInfo.Build.ToString()
+                    },
+                    new ListItems{
+                        Item = "ServicePack",
+                        Value = osInfo.ServicePack
+                    },
+                    new ListItems{
+                        Item = "Bit",
+                        Value = osInfo.OSBit.ToString()
                     }
                 };
 
-                var _driveList = OEM.GetDriveInfo();
+                var driveList = OEM.GetDriveInfo();
 
                 drives.ItemsSource = new List<ListItems>
                 {
                     new ListItems {
                         Item = "Letter",
-                        Value = _driveList[0].Letter
+                        Value = driveList[0].Letter
                     },
                     new ListItems{
                         Item = "Size",
-                        Value = _driveList[0].Size.ToString()
+                        Value = driveList[0].TotalSize.ToSize(CommonHelpers.SizeUnits.GB) + " GB"
                     },
                     new ListItems{
                         Item = "Usage",
-                        Value = _driveList[0].Usage + " - %" + _driveList[0].UsagePercent.ToString().Substring(0, 3)
+                        Value = driveList[0].Usage.ToSize(CommonHelpers.SizeUnits.GB) + " GB" + " - %" + driveList[0].UsagePercent.ToString().Substring(0, 3)
                     },
                     new ListItems{
                         Item = "AvailableSpace",
-                        Value = _driveList[0].AvailableSpace + " - %" + _driveList[0].AvailableSpacePercent.ToString().Substring(0, 3)
+                        Value = driveList[0].AvailableSpace.ToSize(CommonHelpers.SizeUnits.GB) + " GB" + " - %" + driveList[0].AvailableSpacePercent.ToString().Substring(0, 3)
+                    }
+                };
+
+                var biosInfo = OEM.GetBiosInfo();
+
+                bios.ItemsSource = new List<ListItems>
+                {
+                    new ListItems {
+                        Item = "BIOSVersion",
+                        Value = biosInfo.Version
+                    },
+                    new ListItems{
+                        Item = "BuildNumber",
+                        Value = biosInfo.BuildNumber
+                    },
+                    new ListItems{
+                        Item = "CurrentLanguage",
+                        Value = biosInfo.CurrentLanguage
+                    },
+                    new ListItems{
+                        Item = "Manufacturer",
+                        Value = biosInfo.Manufacturer
                     }
                 };
             }

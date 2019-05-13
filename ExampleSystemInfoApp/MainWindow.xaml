@@ -120,6 +120,20 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <Label Content="Bios"></Label>
+                    <ListView x:Name="bios">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Item,  StringFormat={}{0}: }" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Value, FallbackValue=none, TargetNullValue=none}" FontWeight="Thin" />
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+
             </StackPanel>
         </Grid>
     </Grid>
