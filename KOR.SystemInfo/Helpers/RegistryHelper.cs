@@ -11,6 +11,7 @@ namespace KOR.SystemInfo.Helpers
         /// <param name="registryRoot">Enum RegistryRoot</param>
         /// <param name="field">part field</param>
         /// <param name="key">property key</param>
+        /// <param name="defaultValue"></param>
         /// <returns></returns>
         public static string ReadKey(RegistryHive registryRoot, string field, string key, string defaultValue)
 		{
@@ -27,7 +28,7 @@ namespace KOR.SystemInfo.Helpers
 				registryKey = RegistryKey.OpenBaseKey(registryRoot, RegistryView.Registry32);
 			}
 
-            string value = registryKey.OpenSubKey(field).GetValue(key, defaultValue).ToString();
+            var value = registryKey.OpenSubKey(field)?.GetValue(key, defaultValue).ToString();
 
             registryKey.Close();
 

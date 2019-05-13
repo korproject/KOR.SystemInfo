@@ -77,9 +77,7 @@ namespace KOR.SystemInfo.OEM
 						case "Manufacturer":
 							baseBoard.Manufacturer = (string)properties.Value;
 							break;
-						default:
-							break;
-					}
+                    }
 				}
 
 				// dispose managmentObject
@@ -156,9 +154,7 @@ namespace KOR.SystemInfo.OEM
 								case 6:
 									cpu.Architecture = "ia64";
 									break;
-								default:
-									break;
-							}
+                            }
 							break;
 						case "ProcessorType":
 							switch ((ushort)properties.Value)
@@ -181,13 +177,9 @@ namespace KOR.SystemInfo.OEM
 								case 5:
 									cpu.ProcessorType = "Video Processor";
 									break;
-								default:
-									break;
-							}
+                            }
 							break;
-						default:
-							break;
-					}
+                    }
 				}
 
 				// dispose managmentObject
@@ -260,9 +252,7 @@ namespace KOR.SystemInfo.OEM
 						case "Size":
 							hardDrive.Size = (ulong)properties.Value;
 							break;
-						default:
-							break;
-					}
+                    }
 				}
 
 				// dispose managmentObject
@@ -307,9 +297,7 @@ namespace KOR.SystemInfo.OEM
 							memory.Size = properties.Value is null ? 0 : (ulong)properties.Value;
                             memory.SizeGB = properties.Value is null ? "0" : CommonHelpers.ToSize(Convert.ToInt64((ulong)properties.Value), CommonHelpers.SizeUnits.GB);
                             break;
-						default:
-							break;
-					}
+                    }
 				}
 
 				// dispose managmentObject
@@ -360,9 +348,7 @@ namespace KOR.SystemInfo.OEM
 						case "ScreenHeight":
 							monitor.ScreenHeight = properties.Value is null ? 0 : (uint)properties.Value;
 							break;
-						default:
-							break;
-					}
+                    }
 				}
 
 				// dispose managmentObject
@@ -414,9 +400,7 @@ namespace KOR.SystemInfo.OEM
 						case "VideoProcessor":
 							gpu.VideoProcessor = (string)properties.Value;
 							break;
-						default:
-							break;
-					}
+                    }
 				}
 
 				managmentObject.Dispose();
@@ -439,6 +423,7 @@ namespace KOR.SystemInfo.OEM
                     Type = drive.DriveType,
                     FileSystem = drive.DriveFormat,
                     TotalSize = drive.TotalSize,
+                    TotalSizeGB = CommonHelpers.ToSize(drive.TotalSize, CommonHelpers.SizeUnits.GB),
                     AvailableSpace = drive.AvailableFreeSpace,
                     AvailableSpacePercent = 100 * (double)drive.TotalFreeSpace / drive.TotalSize,
                     Usage = drive.TotalSize - drive.AvailableFreeSpace,
@@ -486,8 +471,6 @@ namespace KOR.SystemInfo.OEM
                             break;
                         case "Manufacturer":
                             bios.Manufacturer = (string)properties.Value;
-                            break;
-                        default:
                             break;
                     }
                 }

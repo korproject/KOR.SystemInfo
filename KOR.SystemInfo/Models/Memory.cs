@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KOR.SystemInfo.Models
+﻿namespace KOR.SystemInfo.Models
 {
 	public class Memory
 	{

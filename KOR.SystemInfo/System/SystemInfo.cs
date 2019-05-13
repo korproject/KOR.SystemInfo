@@ -15,7 +15,7 @@ namespace KOR.SystemInfo.System
         /// <returns></returns>
         public static OperatingSystem GetOSInfo()
 		{
-			OperatingSystem OS = new OperatingSystem();
+			var OS = new OperatingSystem();
 
 			#region Operating System Name-Version
 

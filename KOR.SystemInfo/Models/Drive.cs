@@ -13,6 +13,7 @@ namespace KOR.SystemInfo.Models
         public DriveType Type { get; set; }
         public string FileSystem { get; set; }
         public long TotalSize { get; set; }
+        public string TotalSizeGB { get; set; }
         public long Usage { get; set; }
         public double UsagePercent { get; set; }
         public long AvailableSpace { get; set; }

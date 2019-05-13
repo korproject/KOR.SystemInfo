@@ -9,5 +9,6 @@ namespace KOR.SystemInfo.Models
 		public string Manufacturer { get; set; }
 		public string Model { get; set; }
 		public ulong Size { get; set; }
-	}
+        public ulong RemainingSize { get; set; }
+    }
 }
